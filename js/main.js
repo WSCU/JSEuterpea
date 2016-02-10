@@ -13,8 +13,5 @@ $(document).ready(function() {
  //      		alert("Enter something you tool");
  //      	}
  //      });
-
-      var base = BaseToken();
-      base.print("hello!");
 });
 
