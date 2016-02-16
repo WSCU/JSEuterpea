@@ -15,11 +15,11 @@ function Sub ( ) {
 Sub.prototype = new Base( );
 Sub.prototype.showColor = function ( ) {
  console.log( this.color );
-}
+};
 
 Sub.prototype.print = function(aString) {
 	console.log(aString);
-}
+};
 
 var instance = new Sub ( );
 instance.showColor( ); //"blue"

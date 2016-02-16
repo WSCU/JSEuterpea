@@ -18,7 +18,7 @@ function Token(symbol,body,place,type,tokValue) { // Constructor
     // Methods
     this.addValue = function(tokenValue) {
         this.tokValue = tokenValue;
-    }
+    };
 
 }
 

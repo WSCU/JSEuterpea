@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="test/|jquery/|objects/" kind="src" path="js"/>
+	<classpathentry kind="src" path="js/jquery"/>
+	<classpathentry kind="src" path="js/objects"/>
+	<classpathentry kind="src" path="js/test"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
