@@ -3,7 +3,10 @@
 ** ----------------
 ** A Token is an object that has a Symbol, Body, Place, and Type
 *********************************************************************************/
-function Token(symbol,body,place,type,tokValue=null) { // Constructor
+function Token(symbol,body,place,type,tokValue) { // Constructor
+	if(typeof tokValue == 'undefined') {
+		this.tokValue = null;
+	}
     // Instance Variables
     this.symbol = symbol;
     this.body = body;
