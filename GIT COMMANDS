@@ -1,0 +1,3 @@
+GIT COMMANDS	
+
+Show Current Branch Name --> git rev-parse --abbrev-ref HEAD
