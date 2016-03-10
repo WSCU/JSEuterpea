@@ -106,12 +106,12 @@ function checkComment(body) {
 ** It returns an array that has the index and a value associated with what you split by
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 String.prototype.splitWithIndex=function(delim){
-	 var ret=[]
-	 var splits=this.split(delim)
-	 var index=0
+	 var ret=[];
+	 var splits=this.split(delim);
+	 var index=0;
 	 for(var i=0;i<splits.length;i++){
-	  ret.push([index,splits[i]])
-	  index+=splits[i].length+delim.length
+	  ret.push([index,splits[i]]);
+	  index+=splits[i].length+delim.length;
 	  }
 	 return ret;
 }

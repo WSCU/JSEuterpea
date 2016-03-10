@@ -8,7 +8,6 @@
 
 $(document).ready(function() { // wait for page to load to run Javascript
 	// Variable Declaration
-	var evalRet;
 	
 	// Function Calls *Called when page loads
 	init();
@@ -64,7 +63,7 @@ $(document).ready(function() { // wait for page to load to run Javascript
 	function evaluate(input) {
 		// First step is to split into an array based on line breaks
 		input = splitByLine(input);
-//		console.log(input);
+		console.log(input);
 		tokenStream = tokenize(input);
 		
 	}

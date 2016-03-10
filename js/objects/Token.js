@@ -70,7 +70,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var isComment = checkComment()
+				var isComment = checkComment(tokenBody);
 				var newToken = encapsulate(tokenBody, i, j, "Symbol");
 				tokenStream.push(newToken); // Symbol Token
 				j = p;
