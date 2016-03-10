@@ -1,7 +1,7 @@
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** File: utility.js
+* File: utility.js
 ** ----------------
-** This file contains utility functions
+** This file contains what would be "static" utility functions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
@@ -80,22 +80,31 @@ function splitByLine(text) {
 	return ret;
 }
 
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** encapsulate(String text)
-** ----------------
-** 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function encapsulate(body,i,j,type) {
-	var Token = {};
-	Token.line = i;
-	Token.col = j;
-	Token.body = body;
-	Token.type = type;
-	return Token;
-}
-
 function checkComment(body) {
 	return body.length >= 2 && body.substring(0,2) == "--";
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** cleanWhiteSpace(TokenStream tokenStream)
+** ----------------
+** Cleans redundant white space types into one whitespace from the TokenStream
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+function cleanWhiteSpace(TokenStream) {
+	var retTokenStream = [];
+	for(var i=0; i<TokenStream.length - 1; i++) {
+		var t1 = TokenStream[i];
+		var t2 = TokenStream[i+1];
+		if(t1.type == "White Space" && t2.type == "White Space") {
+			console.log("t1.body =  " + t1.body);
+			var body = t1.body + t2.body;
+			console.log("body = " + body);
+			var newToken = new Token(body,t1.column,t1.row,"White Space");
+			retTokenStream.push(newToken);
+		} else {
+			retTokenStream.push(t1);
+		}
+	}
+	return retTokenStream;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

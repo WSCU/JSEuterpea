@@ -4,7 +4,18 @@
  ** Contains the code which tokenizes an array of Strings
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-var token = {}; // empty object that contains line col body and type
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** Token(int row, int column, String body, String type)
+** ----------------
+** Basic constructor for the Token
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+function Token(body,column,row,type) {
+	this.body = body;
+	this.column = column;
+	this.row = row;
+	this.type = type;
+}
 // EVERY TOKEN SHOULD HAVE A:
 // line - what line you are on
 // col - col
@@ -49,14 +60,14 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				} // close while
 				var body = parseInt(line.substring(j, p));
-				var newToken = encapsulate(body, i, j, "Integer");
+				var newToken = new Token(body,i,j,"Integer");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
 			} else if (isSpecial(c)) { // Every special is its own token
 				var tokenBody = line.substring(j, p);
-				var newToken = encapsulate(tokenBody, i, j, "Special");
+				var newToken = new Token(tokenBody, i, j, "Special");
 				j = p;
 				c = line.charAt(p);
 				tokenStream.push(newToken);
@@ -73,12 +84,12 @@ function tokenize(lineArr) {
 				var isComment = checkComment(tokenBody);
 				if(isComment) {	// comment code
 					tokenBody = line.substring(j,line.length);
-					var commentToken = encapsulate(tokenBody,i,j,"White Space");
+					var commentToken = new Token(tokenBody,i,j,"White Space");
 					tokenStream.push(commentToken);
 					j = line.length;
 					p = line.length;
 				} else {
-					var newToken = encapsulate(tokenBody, i, j, "Symbol");
+					var newToken = new Token(tokenBody, i, j, "Symbol");
 					tokenStream.push(newToken); // Symbol Token
 				}
 				j = p;
@@ -96,7 +107,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = encapsulate(tokenBody, i, j, "Name");
+				var newToken = new Token(tokenBody, i, j, "Name");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
@@ -110,7 +121,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = encapsulate(tokenBody, i, j, "White Space");
+				var newToken = new Token(tokenBody, i, j, "White Space");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
@@ -121,5 +132,8 @@ function tokenize(lineArr) {
 			}
 		} // j loop
 	} // i loop
+	console.log("Before");
 	console.log(tokenStream);
+	console.log("After");
+	console.log(cleanWhiteSpace(tokenStream));
 }
