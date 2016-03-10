@@ -95,7 +95,7 @@ function encapsulate(body,i,j,type) {
 }
 
 function checkComment(body) {
-	return body.length >= 2 && body.substring(0,1) == "--";
+	return body.length >= 2 && body.substring(0,2) == "--";
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

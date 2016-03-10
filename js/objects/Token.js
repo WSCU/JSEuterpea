@@ -71,8 +71,16 @@ function tokenize(lineArr) {
 				}
 				var tokenBody = line.substring(j, p);
 				var isComment = checkComment(tokenBody);
-				var newToken = encapsulate(tokenBody, i, j, "Symbol");
-				tokenStream.push(newToken); // Symbol Token
+				if(isComment) {	// comment code
+					tokenBody = line.substring(j,line.length);
+					var commentToken = encapsulate(tokenBody,i,j,"White Space");
+					tokenStream.push(commentToken);
+					j = line.length;
+					p = line.length;
+				} else {
+					var newToken = encapsulate(tokenBody, i, j, "Symbol");
+					tokenStream.push(newToken); // Symbol Token
+				}
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
