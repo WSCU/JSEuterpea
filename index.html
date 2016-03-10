@@ -6,26 +6,47 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 !-->
 <!DOCTYPE html>
-<html>
+<html xmlns = "http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
 	<title>JSEuterpea</title>
-	<script src="js/jquery/jquery-1.12.0.js"></script>
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui/jquery-ui-1.11.4.custom/jquery-ui.css">
+	
+	<!-- Midi.js Imports -->
+		<!-- polyfill -->
+		<script src="Resources/MidiJS/inc/shim/Base64.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/inc/shim/Base64binary.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/inc/shim/WebAudioAPI.js" type="text/javascript"></script>
+		<!-- midi.js package -->
+		<script src="Resources/MidiJS/js/midi/audioDetect.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/midi/gm.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/midi/loader.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/midi/plugin.audiotag.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/midi/plugin.webaudio.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/midi/plugin.webmidi.js" type="text/javascript"></script>
+		<!-- utils -->
+		<script src="Resources/MidiJS/js/util/dom_request_xhr.js" type="text/javascript"></script>
+		<script src="Resources/MidiJS/js/util/dom_request_script.js" type="text/javascript"></script>
+	
+	<script src="js/jquery/jquery-1.12.0.min.js"></script>
+	<script src="js/jquery-ui/jquery-ui1.11.4.custom"></script>
+	<script src="js/objects/environment.js"></script>
 	<script src="js/objects/utility.js"></script>
-	<!--
-	<script src="js/objects/Token.js"</script>
-	-->
 	<script src="js/main.js"></script>
-	<script src="js/test/testCode.js"></script>
+	<script src="js/objects/Token.js"></script>
+	<script src="js/test/test.js"></script>
 </head>
 
 <body>
-	<h5 style="color:red;"> *As of now, tokens must be separated by a space. </h5>
+	<h1> midi tester </h1>
+	<textarea id="midi" placeholder="midi tester" rows="5" cols="100"></textarea>
+	<button id="runmidi">Run Midi</button>
 	<h1> input </h1>
-	<textarea id="input" placeholder="input" rows="1" cols="20"></textarea>
+	<textarea id="input" placeholder="input" rows="5" cols="100"></textarea>
 	<button id="run">Run</button>
 	<h1> output </h1>
 	<textarea id="output" placeholder="output" rows="10" cols="20"></textarea>
+	<button id="playMusic">Play Music</button>
 </body>
 
 </html>

@@ -1,0 +1,102 @@
+Here's some notes I took during class.
+It might help.
+
+3 types of tokens
+Numbers - is always a number 1.0 is a number (1. is not - it is a symbol, it is a function composition)
+Names (a,b,c) letter is always a name
+Symbols (++) ! %  "==" "<=" "<" ">"
+
+* Certain Symbols are keywords
+Keyword - "=" "if" "("
+
+f x  - is a function call
+f . g - is a function 
+
+start with figuring out types
+
+take the string and break up into tokens
+Do it by line
+
+Finite State Machine
+
+Token is an object
+
+Token = [];
+// Every token has a body 
+// Needs to know the substring of where it is
+
+x = c3 + d3; // example Euterpea program
+
+// the music is called x 
+// = is a keyword
+// c3 is a name
+// + is an operator
+// c3 in the third octatve
+// d3 in the third octave
+
+NOTES FROM THE LECTURE 
+2 Theoretical Foundations in Programming Languages
+1) Lambda Calculus
+2) Turing Machine
+
+Every cpu is a finite state controller - which is what the Turing Machine is.
+
+Object Oriented - encapsulated finite state machine
+
+Church / Curry developed Lambda Calculus.
+
+Impure languages are functional languages that use states. 
+If you see assignment you can tell that a language is purely functional.
+
+Untyped Lambda Calculus -- these are the only features you need to make a programming language
+Constants - 3 -> if the program is just a constant return the constant --> evaluate(3) = 3
+Variables - x
+Function Call - f(x)
+Function Definition - lambda(x.b) // where x is the argument and b is the body
+
+Base Vocabulary
++, -, * ,/ ,if
+
+Built in functionality for the base vocabulary
+val v = lambda(arg,body)
+
+Laziness
+inc(f(z))
+-> in a strict language you find the value of z right off the bat
+-> in a lazy language you wait until its needed -- this is done with a thunk
+
+Abstract Syntax Tree
+
+This is how you write a lambda in the music language
+\x->V 
+
+
+lambdas capture environments
+
+Example to get working
+m = c3 + d3
+
+First thing to do is the lexical analysis.
+m -> variable
+= -> punctuation
+c3 -> var
++ -> operator
+d3 -> var
+
+Next thing is to turn this into a ABSTRACT SYNTAX TREE
+
+Looks like this:
+						=
+					m     	+
+						 c3   d3
+
+Then the code gets executed.
+The plus will create a midi tree.
+
+
+https://www.haskell.org/onlinereport/lexemes.html
+special 	-> 	( | ) | , | ; | [ | ] | `| { | } -- Token = "Special"
+ascSymbol 	-> 	! | # | $ | % | & | * | + | . | / | < | = | > | ? | @  | \ | ^ | | | - | ~ -- Token == "Symbol"
+dashes 	-> 	-- {-} -- Token == "Comment"
+
+* a name can contain a ' after the letter

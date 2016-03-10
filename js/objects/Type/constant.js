@@ -1,0 +1,3 @@
+// Extends Program
+
+var constant = {};
