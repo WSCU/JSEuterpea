@@ -1,3 +1,0 @@
-// Extends Program
-
-var constant = {};
