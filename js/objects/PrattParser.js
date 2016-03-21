@@ -9,10 +9,13 @@
 
 var t1 = new Tree(null,null); // Create an empty tree
 function PrattParser(tokenStream) {
-	for(var i=0; i<tokenStream.length - 2; i++) {
-		var t1 = tokenStream[i];
-		if(t1.type == "Symbol") {
-			var tree = new Tree(t1,tokenStream[i-1],tokenStream[i+1]);
+	var pres = 2;
+	while(pres > 0) {
+		for(var i=0; i<tokenStream.length; i++) {
+			if(tokenStream[i].type == "Symbol" && tokenStream[i].pres == pres) {
+
+			} else { continue; }
+			pres--;
 		}
 	}
 }

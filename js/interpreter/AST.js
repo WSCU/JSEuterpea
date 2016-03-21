@@ -5,7 +5,7 @@
    Lambda Abstraction (Variable bound by lambda and AST)
    Assignment (variable to AST)
 */
-function AST = function() {}
+var AST = function() {}
 AST.prototype.isAST = function() {
 	return true;
 }
@@ -22,7 +22,7 @@ AST.prototype.eval = function(e) {
 	console.log("Not Implemented");
 }
 
-function Constant = function(body) {
+var Constant = function(body) {
 	if (body.type == "Integer"){
 		this.body = body;
 	}
@@ -36,10 +36,10 @@ Constant.prototype.eval = function(e) {
 	return body.body;
 }
 
-function Variable = function(body) {
+var Variable = function(body) {
 	if (body[0].type == "Letter") {
 		for (var i = 1; i < body.length; i++) (
-		badVar = false;
+		var badVar = false;
 			if (!(body[i].type == "Letter" || body[i].type == "Number")) {
 				badVar = true;
 			}
@@ -48,7 +48,6 @@ function Variable = function(body) {
 			this.body = body;
 		}
 	}
-}
 Variable.prototype = Object.create(AST.prototype);
 Variable.prototype.constructor = Variable;
 Variable.prototype.isVar = function() {
@@ -58,7 +57,7 @@ Variable.prototype.eval = function(e) {
 	//TODO
 }
 
-function Application = function(fn, arg) {
+var Application = function(fn, arg) {
 	if (fn.isAST() && arg.isAST()) {
 		this.fn = fn;
 		this.arg = arg;

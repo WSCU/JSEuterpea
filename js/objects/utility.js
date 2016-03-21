@@ -36,7 +36,7 @@ function isSpecial(value) {
 
 function isSymbol(value) {
 	for(var i=0; i<symbol.length; i++) {
-		if(symbol[i] == value) {return true;}
+		if(symbol[i].symbol == value) {return true;}
 	}
 	return false;
 }
@@ -95,16 +95,26 @@ function cleanWhiteSpace(TokenStream) {
 		var t1 = TokenStream[i];
 		var t2 = TokenStream[i+1];
 		if(t1.type == "White Space" && t2.type == "White Space") {
-			console.log("t1.body =  " + t1.body);
 			var body = t1.body + t2.body;
-			console.log("body = " + body);
 			var newToken = new Token(body,t1.column,t1.row,"White Space");
 			retTokenStream.push(newToken);
 		} else {
 			retTokenStream.push(t1);
 		}
+		if(i == TokenStream.length - 2) {
+			retTokenStream.push(t2);
+		}
 	}
 	return retTokenStream;
+}
+
+function getPres(tokenBody) {
+	for(var i=0; i<symbol.length; i++) {
+		if(tokenBody == symbol[i].symbol) {
+			return symbol[i].pres;
+		}
+	}
+	return -1;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
