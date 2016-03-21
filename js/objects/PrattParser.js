@@ -7,7 +7,7 @@
 ** Start with 3 + 2 * 1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-var t1 = new Tree(null,null); // Create an empty treea
+var t1 = new Tree(null,null); // Create an empty tree
 function PrattParser(tokenStream) {
 	for(var i=0; i<tokenStream.length - 2; i++) {
 		var t1 = tokenStream[i];
