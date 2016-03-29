@@ -10,12 +10,13 @@
 ** ----------------
 ** Basic constructor for the Token
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function Token(body,column,row,type,pres) {
+function Token(body,column,row,type,pres,assoc) {
 	this.body = body;
 	this.column = column;
 	this.row = row;
 	this.type = type;
 	this.pres = pres;
+	this.assoc = assoc;
 }
 // EVERY TOKEN SHOULD HAVE A:
 // line - what line you are on
@@ -60,14 +61,14 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				} // close while
 				var body = parseInt(line.substring(j, p));
-				var newToken = new Token(body,i,j,"Integer",-1);
+				var newToken = new Token(body,i,j,"Integer",false,false);
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
 			} else if (isSpecial(c)) { // Every special is its own token
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "Special",-1);
+				var newToken = new Token(tokenBody, i, j, "Special",-1,);
 				j = p;
 				c = line.charAt(p);
 				tokenStream.push(newToken);
