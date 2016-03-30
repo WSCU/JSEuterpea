@@ -13,13 +13,13 @@ var ASTLambda = function(Lvar, body) {
         //TODO
         //error message
     }
-}
+};
 ASTLambda.prototype = Object.create(AST.prototype);
 ASTLambda.prototype.constructor = ASTLambda;
 
 ASTLambda.prototype.isLambda = function () {
     return true;
-}
+};
 ASTLambda.prototype.eval = function (e) {
     //TODO
-}
+};

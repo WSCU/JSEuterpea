@@ -15,7 +15,7 @@ var Thunk = new function (e, prog) {
         this.prog = prog;
         this.evaluated = false;
     }
-}
+};
 
 Thunk.prototype.force = function () {
     if (evaluated) {
@@ -27,4 +27,4 @@ Thunk.prototype.force = function () {
     }
     evaluated = true;
     return v;
-}
+};

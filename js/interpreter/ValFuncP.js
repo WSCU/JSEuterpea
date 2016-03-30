@@ -19,7 +19,7 @@ var ValFunP = function(n, fn) {
         this.fn = fn;
         this.args = [];
     }
-}
+};
 
 ValFunP.prototype.apply = function (t) {
     temp = new ValFunP(this);
@@ -28,4 +28,4 @@ ValFunP.prototype.apply = function (t) {
         return temp.fn.call(temp.args);
     }
     return temp;
-}
+};

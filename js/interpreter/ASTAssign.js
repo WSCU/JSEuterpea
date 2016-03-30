@@ -6,13 +6,13 @@
  */
 var ASTAssign = function (body) {
     //TODO
-}
+};
 ASTAssign.prototype = Object.create(AST.prototype);
 ASTAssign.prototype.constructor = ASTAssign;
 
 ASTAssign.prototype.isAssign = function () {
     return true;
-}
+};
 ASTAssign.prototype.eval = function (e) {
     //TODO
-}
+};

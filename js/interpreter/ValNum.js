@@ -4,10 +4,10 @@
  */
 var ValNum = function(n) {
     this.n = n;
-}
+};
 ValNum.prototype = Object.create(Value.prototype);
 ValNum.prototype.constructor = ValNum;
 
 ValNum.prototype.isNum = function () {
     return true;
-}
+};

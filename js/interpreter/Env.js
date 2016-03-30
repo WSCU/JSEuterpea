@@ -12,7 +12,7 @@ var Env = new function (name, val, parent) {
     else {
         this.parent = parent;
     }
-}
+};
 //s should be a ASTVar
 Env.prototype.eval = new function (s) {
     if (s == name) {
@@ -22,4 +22,4 @@ Env.prototype.eval = new function (s) {
         return null;
     }
     return parent.eval(s);
-}
+};

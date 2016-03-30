@@ -12,13 +12,13 @@ var ASTApp = function(fn, arg) {
         //TODO
         //Error Messages
     }
-}
+};
 ASTApp.prototype = Object.create(AST.prototype);
 ASTApp.prototype.constructor = ASTApp;
 
 ASTApp.prototype.isApp = function() {
     return true;
-}
+};
 ASTApp.prototype.eval = function(e) {
     funct= fn.eval(e);
     if (!funct.isFunct()) {
@@ -28,4 +28,4 @@ ASTApp.prototype.eval = function(e) {
         t = new Thunk(e, arg);
         return funct.apply(t);
     }
-}
+};
