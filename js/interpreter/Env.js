@@ -6,7 +6,7 @@
 var Env = new function (name, val, parent) {
     this.name = name;
     this.val = val;
-    if (parent === undefined) {
+    if (!parent) {
         this.parent = null;
     }
     else {
