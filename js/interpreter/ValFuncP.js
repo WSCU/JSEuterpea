@@ -2,17 +2,15 @@
     These are Values that hold Primative Functions
     For now Primative Functions are going to be things like add and subtract
  */
-var ValFunP = function(n, strict, fn) {
-    if (!fn) {
+var ValFunP = function(n, fn) {
+    if (n.isFunc()) {
         copy = n;
         this.n = copy.n;
         this.fn = copy.fn;
-        this.strict = copy.strict;
-        this.args = strict;
+        this.args = fn;
     }
     else {
         this.n = n;
-        this.strict = strict;
         this.fn = fn;
         this.args = [];
     }
