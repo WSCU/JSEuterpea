@@ -5,9 +5,9 @@
  * The Thunk then also knows that it has been Evaluated and will then return the Vaule
  * instead of trying to Evaluate its self again.
  */
-var Thunk = new function (e, prog) {
-    if (prog === undefined) {
-        this.v = e;
+var Thunk = new function (prog, e) {
+    if (!e) {
+        this.v = prog;
         this.evaluated = true;
     }
     else {
