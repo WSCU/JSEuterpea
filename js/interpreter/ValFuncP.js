@@ -17,6 +17,12 @@ var ValFunP = function(n, strict, fn) {
         this.args = [];
     }
 };
+ValFunP.prototype = Object.create(Value.prototype);
+ValFunP.prototype.constructor = ValFunP;
+
+ValFunP.isFunc = function() {
+    return true;
+}
 
 ValFunP.prototype.apply = function (t) {
     tempArgs = args.concat(t);
