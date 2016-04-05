@@ -17,7 +17,7 @@ var Thunk = new function (prog, e) {
     }
 };
 
-Thunk.prototype.asNum = funtion () {
+Thunk.prototype.asNum = function () {
     if (evaluated && v.isNum()) {
         return v;
     }
