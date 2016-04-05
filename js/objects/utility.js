@@ -114,7 +114,16 @@ function getPres(tokenBody) {
 			return symbol[i].pres;
 		}
 	}
-	return -1;
+	return undefined;
+}
+
+function getAssoc(tokenBody) {
+	for(var i=0; i<symbol.length; i++) {
+		if(tokenBody == symbol[i].symbol) {
+			return symbol[i].assoc;
+		}
+	}
+	return undefined;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -67,7 +67,8 @@ $(document).ready(function() { // wait for page to load to run Javascript
 			alert("Enter something damint");
 			return;
 		}
-		// console.log(tokenStream);
+		console.log(tokenStream);
+		return;
 		PrattParser(tokenStream);
 	}
 }); // close document.onload

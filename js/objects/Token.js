@@ -6,7 +6,7 @@
 
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** Token(int row, int column, String body, String type)
+** Token(int row, int column, String body, String type,int pres,String assoc)
 ** ----------------
 ** Basic constructor for the Token
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -18,30 +18,15 @@ function Token(body,column,row,type,pres,assoc) {
 	this.pres = pres;
 	this.assoc = assoc;
 }
-// EVERY TOKEN SHOULD HAVE A:
-// line - what line you are on
-// col - col
-// body - the body is a string representation of the token
-// type - is an integer
-
-// Type System =
-// 1 is punctuation
-// 2 is operator
-// 3 is whitespace
-// 4 is new line
 
 /*
- * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
- * tokenize(String [] strArr) * ---------------- * Determines what type of token
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * tokenize(String [] strArr)
+ * Determines what type of token
  * is in the strArr * Returns an associative array with the type associated
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 function tokenize(lineArr) {
-	// white space = ignore it
-	// new line = increment line count - check for end
-	// punctuation ()[]{},;
-	// operator + - * / = < > & | ~ %
-	// token has line col body and type
 	tokenStream = []; // empty array
 	for ( var i = 0; i < lineArr.length; i++) { // loop through the rows
 		var line = lineArr[i][1];
@@ -61,14 +46,14 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				} // close while
 				var body = parseInt(line.substring(j, p));
-				var newToken = new Token(body,i,j,"Integer",false,false);
+				var newToken = new Token(body,i,j,"Integer");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
 			} else if (isSpecial(c)) { // Every special is its own token
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "Special",-1,);
+				var newToken = new Token(tokenBody, i, j, "Special");
 				j = p;
 				c = line.charAt(p);
 				tokenStream.push(newToken);
@@ -85,12 +70,12 @@ function tokenize(lineArr) {
 				var isComment = checkComment(tokenBody);
 				if(isComment) {	// comment code
 					tokenBody = line.substring(j,line.length);
-					var commentToken = new Token(tokenBody,i,j,"White Space",-1);
+					var commentToken = new Token(tokenBody,i,j,"White Space");
 					tokenStream.push(commentToken);
 					j = line.length;
 					p = line.length;
 				} else {
-					var newToken = new Token(tokenBody, i, j, "Symbol",getPres(tokenBody));
+					var newToken = new Token(tokenBody, i, j, "Symbol",getPres(tokenBody),getAssoc(tokenBody));
 					tokenStream.push(newToken); // Symbol Token
 				}
 				j = p;
@@ -108,7 +93,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "Name",-1);
+				var newToken = new Token(tokenBody, i, j, "Name");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
@@ -122,7 +107,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "White Space",-1);
+				var newToken = new Token(tokenBody, i, j, "White Space");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
