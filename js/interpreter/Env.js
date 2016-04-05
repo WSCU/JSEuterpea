@@ -15,11 +15,11 @@ var Env = new function (name, val, parent) {
 };
 //s should be a ASTVar
 Env.prototype.eval = new function (s) {
-    if (s == name) {
-        return val.eval();
+    if (s == this.name) {
+        return this.val.eval();
     }
-    if (parent == null) {
+    if (this.parent == null) {
         return null;
     }
-    return parent.eval(s);
+    return this.parent.eval(s);
 };

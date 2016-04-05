@@ -17,42 +17,42 @@ var Thunk = new function (prog, e) {
     }
 };
 
-Thunk.prototype.asNum = funtion () {
-    if (evaluated && v.isNum()) {
-        return v;
+Thunk.prototype.asNum = new function () {
+    if (this.evaluated && this.v.isNum()) {
+        return this.v;
     }
-    if (evaluated && !v.isNum()) {
+    if (this.evaluated && !this.v.isNum()) {
         //Error
     }
-    this.v = prog.eval(e);
-    if (v == null) {
+    this.v = this.prog.eval(this.e);
+    if (this.v == null) {
         //Error
     }
-    evaluated = true;
-    if (v.isNum()) {
-        return v;
+    this.evaluated = true;
+    if (this.v.isNum()) {
+        return this.v;
     }
     else {
         //error
     }
-}
+};
 
-Thunk.prototype.asFunc = function() {
-    if (evaluated && v.isFunc()) {
-        return v;
+Thunk.prototype.asFunc = new function() {
+    if (this.evaluated && this.v.isFunc()) {
+        return this.v;
     }
-    if (evaluated && !v.isFunc()) {
+    if (this.evaluated && !this.v.isFunc()) {
         //error
     }
-    this.v = prog.eval(e);
-    if (v == null) {
+    this.v = this.prog.eval(this.e);
+    if (this.v == null) {
         //error
     }
-    evaluated = true;
-    if (v.isFunc()) {
-        return v;
+    this.evaluated = true;
+    if (this.v.isFunc()) {
+        return this.v;
     }
     else {
         //error
     }
-}
+};
