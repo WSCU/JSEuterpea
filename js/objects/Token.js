@@ -6,41 +6,27 @@
 
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** Token(int row, int column, String body, String type)
+** Token(int row, int column, String body, String type,int pres,String assoc)
 ** ----------------
 ** Basic constructor for the Token
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function Token(body,column,row,type) {
+function Token(body,column,row,type,pres,assoc) {
 	this.body = body;
 	this.column = column;
 	this.row = row;
 	this.type = type;
+	this.pres = pres;
+	this.assoc = assoc;
 }
-// EVERY TOKEN SHOULD HAVE A:
-// line - what line you are on
-// col - col
-// body - the body is a string representation of the token
-// type - is an integer
-
-// Type System =
-// 1 is punctuation
-// 2 is operator
-// 3 is whitespace
-// 4 is new line
 
 /*
- * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
- * tokenize(String [] strArr) * ---------------- * Determines what type of token
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * tokenize(String [] strArr)
+ * Determines what type of token
  * is in the strArr * Returns an associative array with the type associated
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 function tokenize(lineArr) {
-	// white space = ignore it
-	// new line = increment line count - check for end
-	// punctuation ()[]{},;
-	// operator + - * / = < > & | ~ %
-
-	// token has line col body and type
 	tokenStream = []; // empty array
 	for ( var i = 0; i < lineArr.length; i++) { // loop through the rows
 		var line = lineArr[i][1];
@@ -89,7 +75,7 @@ function tokenize(lineArr) {
 					j = line.length;
 					p = line.length;
 				} else {
-					var newToken = new Token(tokenBody, i, j, "Symbol");
+					var newToken = new Token(tokenBody, i, j, "Symbol",getPres(tokenBody),getAssoc(tokenBody));
 					tokenStream.push(newToken); // Symbol Token
 				}
 				j = p;
@@ -131,9 +117,9 @@ function tokenize(lineArr) {
 				j--;
 			}
 		} // j loop
-	} // i loop
-	console.log("Before");
-	console.log(tokenStream);
-	console.log("After");
-	console.log(cleanWhiteSpace(tokenStream));
+	} // i 
+	if(tokenStream.length > 0) {
+		return cleanWhiteSpace(tokenStream);
+	}
+	return false;
 }

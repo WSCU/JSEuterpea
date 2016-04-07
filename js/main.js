@@ -61,10 +61,14 @@ $(document).ready(function() { // wait for page to load to run Javascript
 	** Notice that lexer is defined in a different file
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	function evaluate(input) {
-		// First step is to split into an array based on line breaks
 		input = splitByLine(input);
-		console.log(input);
 		tokenStream = tokenize(input);
-		
+		if(!tokenStream) {
+			alert("Enter something damint");
+			return;
+		}
+		console.log(tokenStream);
+		return;
+		PrattParser(tokenStream);
 	}
 }); // close document.onload

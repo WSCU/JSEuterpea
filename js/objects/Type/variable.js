@@ -1,2 +1,0 @@
-// Extends Program
-var variable = {};
