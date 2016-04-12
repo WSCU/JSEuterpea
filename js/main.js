@@ -64,7 +64,7 @@ $(document).ready(function() { // wait for page to load to run Javascript
 		input = splitByLine(input);
 		tokenStream = tokenize(input);
 		if(!tokenStream) {
-			alert("Enter something damint");
+			alert("Enter something damnit");
 			return;
 		}
 		console.log(tokenStream);

@@ -4,7 +4,6 @@
  ** Contains the code which tokenizes an array of Strings
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ** Token(int row, int column, String body, String type,int pres,String assoc)
 ** ----------------
@@ -46,14 +45,14 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				} // close while
 				var body = parseInt(line.substring(j, p));
-				var newToken = new Token(body,i,j,"Integer");
+				var newToken = new Token(body,j,i,"Integer");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
 			} else if (isSpecial(c)) { // Every special is its own token
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "Special");
+				var newToken = new Token(tokenBody, j,i, "Special");
 				j = p;
 				c = line.charAt(p);
 				tokenStream.push(newToken);
@@ -70,12 +69,12 @@ function tokenize(lineArr) {
 				var isComment = checkComment(tokenBody);
 				if(isComment) {	// comment code
 					tokenBody = line.substring(j,line.length);
-					var commentToken = new Token(tokenBody,i,j,"White Space");
+					var commentToken = new Token(tokenBody,j,i,"White Space");
 					tokenStream.push(commentToken);
 					j = line.length;
 					p = line.length;
 				} else {
-					var newToken = new Token(tokenBody, i, j, "Symbol",getPres(tokenBody),getAssoc(tokenBody));
+					var newToken = new Token(tokenBody, j,i, "Symbol",getPres(tokenBody),getAssoc(tokenBody));
 					tokenStream.push(newToken); // Symbol Token
 				}
 				j = p;
@@ -93,7 +92,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "Name");
+				var newToken = new Token(tokenBody, j,i, "Name");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
@@ -107,7 +106,7 @@ function tokenize(lineArr) {
 					c = line.charAt(p);
 				}
 				var tokenBody = line.substring(j, p);
-				var newToken = new Token(tokenBody, i, j, "White Space");
+				var newToken = new Token(tokenBody, j,i, "White Space");
 				tokenStream.push(newToken);
 				j = p;
 				c = line.charAt(p);
