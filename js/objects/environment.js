@@ -82,4 +82,4 @@ var money = {symbol:"$",pres:0,assoc:"r"};
 symbol.push(money);
 
 var moneyExclam = {symbol:"$!",pres:0,assoc:"r"};
-symbol.push(moneyExlam);
+symbol.push(moneyExclam);
