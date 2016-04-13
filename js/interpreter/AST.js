@@ -90,7 +90,7 @@ function createAst() {
 // ** in the Enviornment and returns the Thunk assosiated with it.
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  var astVarVar = createAst();
- function createAstConst(token) {
+ function createAstVar(token) {
     var ret = Object.create(astConstVar, {
         getAstType: {
             value: function() {
@@ -106,6 +106,27 @@ function createAst() {
     ret.token = token;
     return ret;
  }
+ 
+var astAppVar = createAst();
+function createAstApp(fn, args) {
+	var ret = Object.create(astAppVar, {
+		getAstType: {
+			value: function() {
+				return "App";
+            },
+        },
+        eval: {
+            value: function(env) {
+                var func = ret.fn.eval(env);
+				var t = new Thunk(ret.args, env);
+				return func.apply(t);
+            },
+        },
+    });
+    ret.fn = fn;
+	ret.args = ags;
+    return ret;
+}
 // /*
 //     ASTAssign
 //     Assign takes a Token which is the name and an AST

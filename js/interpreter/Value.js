@@ -51,11 +51,25 @@ var valFunPVar = createValue();
         },
         apply: {
             value: function(thunk) {
-                var tempArgs = 
+                var tempArgs = ret.args.concat(thunk);
+				if (tempArgs.size() == ret.n) {
+					return ret.fn.apply(tempArgs);
+				}
+				return createFunPValue(ret, tempArgs);
             },
         },
     });
-    ret.val = val;
+    if (n.getType() == "FunP") {
+		var copy = n;
+		ret.n = n;
+		ret.fn = copy.fn;
+		ret.args = fn;
+	}
+	else {
+		ret.n = n;
+		ret.fn = fn;
+		ret.args = [];
+	}
     return ret;
  }
 /*
