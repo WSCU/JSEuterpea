@@ -7,15 +7,31 @@
 ** Start with 3 + 2 * 1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-var t1 = new Tree(null,null); // Create an empty tree
 function PrattParser(tokenStream) {
-	var pres = 2;
-	while(pres > 0) {
-		for(var i=0; i<tokenStream.length; i++) {
-			if(tokenStream[i].type == "Symbol" && tokenStream[i].pres == pres) {
-
-			} else { continue; }
-			pres--;
+	var ret = []; // an array of AST
+	var maxPres = 0; // highest pres
+	var maxPresIdx;
+	for(var i=0; i<tokenStream.length; i++) { // loop through all pres's
+		var curToken = tokenStream[i];
+		// var curAst;
+		if(curToken.pres > maxPres) {
+			maxPres = curToken.pres;
+			maxPresIdx = i;
 		}
+		// switch(curToken.type) {
+		// 	case "Integer":
+		// 		curAst = createAstConst(curToken)
+		// 		break;
+		// 	case ("Name" || "Symbol"):
+		// 		curAst = createAstVar(curToken);
+		// 		break;
+		// }
+		// ret.push(curAst);
+		// pres--;
 	}
+	return ret;
+}
+
+function convertInfix(tokenStream) {
+	
 }

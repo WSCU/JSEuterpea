@@ -8,7 +8,7 @@
  Variable            = ASTVar
  Assignment          = ASTAssign (equals or definition)
  Application         = ASTApp (@)
- Lambda Abstraction  =
+ Lambda Abstraction  = ASTLambda
 
  !!! A NAME IS BOTH AN OPERATOR OR A REGUALR VARIABLE
  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -108,7 +108,7 @@ function createAstVar(token) {
 }
 
 var astAppVar = createAst();
-function createAstApp(fn, args) {
+function createAstApp() {
     var ret = Object.create(astAppVar, {
         getAstType: {
             value: function () {
@@ -123,8 +123,18 @@ function createAstApp(fn, args) {
             },
         },
     });
-    ret.fn = fn;
-    ret.args = args;
+ 
+    if(arguments.length == 2) {
+        ret.fn = arguments[0];
+        ret.args = arguments[1];
+    } else { // multiple arguments
+        ret.args = arguments[arguments.length - 1];
+        var tempArgs =[];
+        for (var i = 0; i < arguments.length-1; i++) {
+            tempArgs[i] = arguments[i];
+        }
+        ret.fn = createAstApp.apply(null, tempArgs);
+    }
     return ret;
 }
 // /*

@@ -8,6 +8,12 @@
 ** Token(int row, int column, String body, String type,int pres,String assoc)
 ** ----------------
 ** Basic constructor for the Token
+** Types Possible:
+** 		Integer
+** 		Special
+** 		White Space
+** 		Symbol
+** 		Name
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function Token(body,column,row,type,pres,assoc) {
 	this.body = body;
