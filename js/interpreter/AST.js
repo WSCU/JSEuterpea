@@ -1,25 +1,25 @@
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** File: AST.js
-** ----------------
-** Contains all the object creation for AST
-**
-** BASIC STRUCTURE OF AST
-    Constant            = ASTConst
-    Variable            = ASTVar
-    Assignment          = ASTAssign (equals or definition)
-    Application         = ASTApp (@)
-    Lambda Abstraction  = 
+ ** File: AST.js
+ ** ----------------
+ ** Contains all the object creation for AST
+ **
+ ** BASIC STRUCTURE OF AST
+ Constant            = ASTConst
+ Variable            = ASTVar
+ Assignment          = ASTAssign (equals or definition)
+ Application         = ASTApp (@)
+ Lambda Abstraction  =
 
-!!! A NAME IS BOTH AN OPERATOR OR A REGUALR VARIABLE
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+ !!! A NAME IS BOTH AN OPERATOR OR A REGUALR VARIABLE
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-** factoryAst(curToken, tokenStream)
-** ----------------
-** Factory function
-** 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+ ** factoryAst(curToken, tokenStream)
+ ** ----------------
+ ** Factory function
+ **
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 // function factoryAst(curToken, tokenStream) {
 //     switch(curToken.type) {
 //         case "Integer":
@@ -44,13 +44,13 @@ function createAst() {
     return Object.create(ASTVar, {
         // Methods
         getAstType: {
-            value: function() {
+            value: function () {
                 return "Base";
             },
         },
         eval: {
-           value: function(env) {
-                return;                
+            value: function (env) {
+                return;
             },
         },
     });
@@ -64,23 +64,23 @@ function createAst() {
 // ** AST that represents constant
 // ** Extends AST
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
- var astConstVar = createAst();
- function createAstConst(token) {
+var astConstVar = createAst();
+function createAstConst(token) {
     var ret = Object.create(astConstVar, {
         getAstType: {
-            value: function() {
+            value: function () {
                 return "Const";
             },
         },
         eval: {
-            value: function(env) {
-                return token.body;
+            value: function (env) {
+                return createNumValue(token.body);
             },
         },
     });
     ret.token = token;
     return ret;
- }
+}
 // /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ** CLASS: ASTVar
@@ -89,42 +89,42 @@ function createAst() {
 // ** When it is eval is called it finds the first occurence of the name
 // ** in the Enviornment and returns the Thunk assosiated with it.
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- var astVarVar = createAst();
- function createAstVar(token) {
+var astVarVar = createAst();
+function createAstVar(token) {
     var ret = Object.create(astConstVar, {
         getAstType: {
-            value: function() {
+            value: function () {
                 return "Var";
             },
         },
         eval: {
-            value: function(env) {
+            value: function (env) {
                 return env.eval(this.token);
             },
         },
     });
     ret.token = token;
     return ret;
- }
- 
+}
+
 var astAppVar = createAst();
 function createAstApp(fn, args) {
-	var ret = Object.create(astAppVar, {
-		getAstType: {
-			value: function() {
-				return "App";
+    var ret = Object.create(astAppVar, {
+        getAstType: {
+            value: function () {
+                return "App";
             },
         },
         eval: {
-            value: function(env) {
+            value: function (env) {
                 var func = ret.fn.eval(env);
-				var t = new Thunk(ret.args, env);
-				return func.apply(t);
+                var t = new Thunk(ret.args, env);
+                return func.apply(t);
             },
         },
     });
     ret.fn = fn;
-	ret.args = args;
+    ret.args = args;
     return ret;
 }
 // /*

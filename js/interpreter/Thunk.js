@@ -16,7 +16,7 @@ var Thunk = function (prog, e) {
         this.evaluated = false;
     }
 
-    this.eval = function() {
+    this.eval = function () {
         if (this.evaluated) {
             return this.v;
         }
@@ -27,10 +27,10 @@ var Thunk = function (prog, e) {
 
     this.asNum = function () {
         this.eval();
-        return this.v;
+        return this.v.val;
     };
 
-    this.asFunc = function() {
+    this.asFunc = function () {
         this.eval();
         return this.v;
     };
