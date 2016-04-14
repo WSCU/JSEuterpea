@@ -16,43 +16,22 @@ var Thunk = function (prog, e) {
         this.evaluated = false;
     }
 
-    this.asNum = function () {
-        if (this.evaluated && this.v.isNum()) {
+    this.eval = function() {
+        if (this.evaluated) {
             return this.v;
-        }
-        if (this.evaluated && !this.v.isNum()) {
-            //Error
         }
         this.v = this.prog.eval(this.e);
-        if (this.v == null) {
-            //Error
-        }
         this.evaluated = true;
-        if (this.v.isNum()) {
-            return this.v;
-        }
-        else {
-            //error
-        }
+        return this.v;
+    };
+
+    this.asNum = function () {
+        this.eval();
+        return this.v;
     };
 
     this.asFunc = function() {
-        if (this.evaluated && this.v.isFunc()) {
-            return this.v;
-        }
-        if (this.evaluated && !this.v.isFunc()) {
-            //error
-        }
-        this.v = this.prog.eval(this.e);
-        if (this.v == null) {
-            //error
-        }
-        this.evaluated = true;
-        if (this.v.isFunc()) {
-            return this.v;
-        }
-        else {
-            //error
-        }
+        this.eval();
+        return this.v;
     };
 };

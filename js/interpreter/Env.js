@@ -14,7 +14,7 @@ function Env(name, val, parent) {
     }
 
     this.eval = function (s) {
-        if (s == this.name) {
+        if (this.name == s.body) {
             return this.val.eval();
         }
         if (this.parent == null) {

@@ -1,17 +1,17 @@
 /*
-    This is the Interface for all Value Types
+ This is the Interface for all Value Types
  */
 var valueVar = {};
 function createValue() {
     return Object.create(valueVar, {
         // Methods
         getType: {
-            value: function() {
+            value: function () {
                 // does nothing -- this is the interface
             },
         },
         apply: {
-           value: function(thunk) {
+            value: function (thunk) {
                 // interface       
             },
         },
@@ -19,16 +19,16 @@ function createValue() {
 }
 
 var valNumVar = createValue();
- function createNumValue(val) {
+function createNumValue(val) {
     var ret = Object.create(astConstVar, {
         getType: {
-            value: function() {
+            value: function () {
                 return "Num";
             },
         },
         apply: {
-            value: function(thunk) {
-                if(thunk) {
+            value: function (thunk) {
+                if (thunk) {
                     console.log("ERROR: token not valid for numberValue");
                     console.log(thunk);
                     return;
@@ -39,42 +39,41 @@ var valNumVar = createValue();
     });
     ret.val = val;
     return ret;
- }
+}
 
 var valFunPVar = createValue();
- function createFunPValue(n,fn) {
+function createFunPValue(n, fn) {
     var ret = Object.create(astConstVar, {
         getType: {
-            value: function() {
+            value: function () {
                 return "FunP";
             },
         },
         apply: {
-            value: function(thunk) {
-                var tempArgs = ret.args.concat(thunk);
-				if (tempArgs.size() == ret.n) {
-					return ret.fn.apply(tempArgs);
-				}
-				return createFunPValue(ret, tempArgs);
+            value: function (thunk) {
+                var tempArgs = this.args.concat([thunk]);
+                if (tempArgs.length == ret.n) {
+                    return ret.fn.apply(null, tempArgs);
+                }
+                return createFunPValue(ret, tempArgs);
             },
         },
     });
-    if (n.getType() == "FunP") {
-		var copy = n;
-		ret.n = n;
-		ret.fn = copy.fn;
-		ret.args = fn;
-	}
-	else {
-		ret.n = n;
-		ret.fn = fn;
-		ret.args = [];
-	}
+    if (typeof n == "number") {
+        ret.n = n;
+        ret.fn = fn;
+        ret.args = [];
+        return ret;
+    }
+    var copy = n;
+    ret.n = copy.n;
+    ret.fn = copy.fn;
+    ret.args = fn;
     return ret;
- }
+}
 /*
-    ValNums are Values that hard holding a known Value.
-    These could be things like Intergers, Strings, or Booleans
+ ValNums are Values that hard holding a known Value.
+ These could be things like Intergers, Strings, or Booleans
  */
 // var ValNum = function(n) {
 //     this.n = n;

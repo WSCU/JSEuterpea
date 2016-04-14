@@ -20,18 +20,18 @@
 ** Factory function
 ** 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function factoryAst(curToken, tokenStream) {
-    switch(curToken.type) {
-        case "Integer":
-            return createAstConst();
-            break;
-        case "Name":
-            return new ASTVar();
-            break;
-        default: 
-             console.log("Error: Improper type. Check AST.js");
-    }
-}
+// function factoryAst(curToken, tokenStream) {
+//     switch(curToken.type) {
+//         case "Integer":
+//             return createAstConst();
+//             break;
+//         case "Name":
+//             return new ASTVar();
+//             break;
+//         default:
+//              console.log("Error: Improper type. Check AST.js");
+//     }
+// }
 
 // /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ** SUPERCLASS: AST
@@ -99,7 +99,7 @@ function createAst() {
         },
         eval: {
             value: function(env) {
-                return token.body;
+                return env.eval(this.token);
             },
         },
     });
@@ -124,7 +124,7 @@ function createAstApp(fn, args) {
         },
     });
     ret.fn = fn;
-	ret.args = ags;
+	ret.args = args;
     return ret;
 }
 // /*
