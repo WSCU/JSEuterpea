@@ -127,6 +127,25 @@ function getAssoc(tokenBody) {
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** getArrRange(start, end, array)
+ ** ----------------
+ ** start = the start index you want
+  * end = end index you want
+   * array = the array
+ **  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+function getArrRange(start,end,array) {
+	var ret = [];
+	if(array && end < array.length) {
+		for (var i = start; i <= end; i++) {
+			ret.push(array[i]);
+		}
+		return ret;
+	} else {
+		console.log("getArrRange went out of bounds!");
+	}
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ** string.splitWithIndex
 ** ----------------
 ** This functions is a string function

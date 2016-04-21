@@ -96,6 +96,8 @@ $(document).ready(function() { // wait for page to load to run Javascript
 		input = splitByLine(input);
 		console.log(input);
 		tokenStream = tokenize(input);
-
+		var astPrat = PrattParser(tokenStream);
+		console.log(astPrat);
+		console.log(astPrat.eval(envP));
 	}
 }); // close document.onload

@@ -8,28 +8,33 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 function PrattParser(tokenStream) {
+	if(tokenStream.length == 1) {
+		var curToken = tokenStream[0];
+		switch(curToken.type) {
+			case "Integer":
+				return createAstConst(curToken)
+				break;
+			case ("Name" || "Symbol"):
+				return createAstVar(curToken);
+				break;
+		}
+	}
 	var ret = []; // an array of AST
-	var maxPres = 0; // highest pres
-	var maxPresIdx;
+	var minPres = 9; // highest pres
+	var minPresIdx;
 	for(var i=0; i<tokenStream.length; i++) { // loop through all pres's
 		var curToken = tokenStream[i];
-		// var curAst;
-		if(curToken.pres > maxPres) {
-			maxPres = curToken.pres;
-			maxPresIdx = i;
+		if(curToken.pres < minPres) {
+			minPres = curToken.pres;
+			minPresIdx = i;
 		}
-		// switch(curToken.type) {
-		// 	case "Integer":
-		// 		curAst = createAstConst(curToken)
-		// 		break;
-		// 	case ("Name" || "Symbol"):
-		// 		curAst = createAstVar(curToken);
-		// 		break;
-		// }
-		// ret.push(curAst);
-		// pres--;
-	}
-	return ret;
+	} // i loop
+	var tsL = getArrRange(0,minPresIdx - 1, tokenStream);
+	var tsR = getArrRange(minPresIdx + 1, tokenStream.length - 1, tokenStream);
+	var astL = PrattParser(tsL);
+	var astR = PrattParser(tsR);
+	var operator = createAstVar(tokenStream[minPresIdx]);
+	return createAstApp(operator,astL,astR);
 }
 
 function convertInfix(tokenStream) {

@@ -20,7 +20,7 @@ function createValue() {
 
 var valNumVar = createValue();
 function createNumValue(val) {
-    var ret = Object.create(valNumtVar, {
+    var ret = Object.create(valNumVar, {
         getType: {
             value: function () {
                 return "Num";
