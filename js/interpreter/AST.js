@@ -91,7 +91,7 @@ function createAstConst(token) {
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var astVarVar = createAst();
 function createAstVar(token) {
-    var ret = Object.create(astConstVar, {
+    var ret = Object.create(astVarVar, {
         getAstType: {
             value: function () {
                 return "Var";

@@ -20,7 +20,7 @@ function createValue() {
 
 var valNumVar = createValue();
 function createNumValue(val) {
-    var ret = Object.create(astConstVar, {
+    var ret = Object.create(valNumtVar, {
         getType: {
             value: function () {
                 return "Num";
@@ -43,7 +43,7 @@ function createNumValue(val) {
 
 var valFunPVar = createValue();
 function createFunPValue(n, fn) {
-    var ret = Object.create(astConstVar, {
+    var ret = Object.create(valFunPVar, {
         getType: {
             value: function () {
                 return "FunP";
@@ -69,6 +69,29 @@ function createFunPValue(n, fn) {
     ret.n = copy.n;
     ret.fn = copy.fn;
     ret.args = fn;
+    return ret;
+}
+
+var valMusVar = createValue();
+function createMusVar(val) {
+    var ret = Object.create(valMusVar, {
+        getType: {
+            value: function() {
+                return "Music";
+            },
+        },
+        apply: {
+            value: function (thunk) {
+                if (thunk) {
+                    console.log("Cannont apply Music to token")
+                    console.log(thunk);
+                    return;
+                }
+                return val;
+            }
+        }
+    });
+    ret.val = val;
     return ret;
 }
 /*

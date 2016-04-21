@@ -34,4 +34,9 @@ var Thunk = function (prog, e) {
         this.eval();
         return this.v;
     };
+
+    this.asMusic = function() {
+        this.eval();
+        return this.v;
+    };
 };
