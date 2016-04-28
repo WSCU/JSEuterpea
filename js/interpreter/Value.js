@@ -73,7 +73,7 @@ function createFunPValue(n, fn) {
 }
 
 var valMusVar = createValue();
-function createMusVar(val) {
+function createMusValue(val) {
     var ret = Object.create(valMusVar, {
         getType: {
             value: function() {
