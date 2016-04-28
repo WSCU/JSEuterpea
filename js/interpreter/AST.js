@@ -137,6 +137,37 @@ function createAstApp() {
     }
     return ret;
 }
+
+var astDefVar = createAst();
+function createAstDef(token, ast) {
+    var ret = Object.create(astDefVar, {
+        getAstType: {
+            value: function () {
+                return "Def";
+            }
+        },
+        eval: {
+            value: function (env) {
+                envP = new Env(this.left, this.right, env);
+                return;
+            }
+        }
+    });
+    ret.left = token.body;
+    ret.right = new Thunk(ast,envP);
+    return ret;
+}
+
+function createDefs(definitions) {
+    for (var i = 0; i < definitions.length; i++) {
+        definitions[i].eval(envP);
+    }
+    var here = envP;
+    while(here != null) {
+        here.val.e = envP;
+        here = here.parent;
+    }
+}
 // /*
 //     ASTAssign
 //     Assign takes a Token which is the name and an AST
