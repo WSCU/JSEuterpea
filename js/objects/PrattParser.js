@@ -37,6 +37,34 @@ function PrattParser(tokenStream) {
 	return createAstApp(operator,astL,astR);
 }
 
-function convertInfix(tokenStream) {
-	
+function prePrattParser(tokenStream) {
+	var name;
+	var body;
+	var retAst;
+	var defArr = [];
+	for(var i=0; i<tokenStream.length; i++) {
+		if(tokenStream[i].body == "=") {
+			if(tokenStream[i-1].type == "Whitespace") {
+				name = tokenStream[i-2];
+			} else {
+				name = tokenStream[i-1];
+			}
+			var idx;
+			for(var j=i+1; j<tokenStream.length; j++) {
+				if(tokenStream[j].type == "Newline") {
+					if(tokenStream[j+1]) {
+						if(tokenStream[j+1].type != "Whitespace") {
+							idx = j;
+						}
+					} else if(!tokenStream[j+1]) {
+						idx = j;
+					}
+				}
+			} // j loop 
+			body = getArrRange(i+1 ,idx-1,tokenStream);
+			retAst = PrattParser(body);
+			defArr.push(createAstDef(name,retAst));
+		}
+	} // i loop
+	createDefs(defArr);
 }

@@ -146,6 +146,28 @@ function getArrRange(start,end,array) {
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** getArrRange(start, end, array)
+ ** ----------------
+ ** start = the start index you want
+  * end = end index you want
+   * array = the array
+ **  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+function checkName(string) {
+	var curChar;
+	if(isInt(string.charAt(0))) {
+		return false;
+	}
+	for(var i=0; i<string.length; i++) {
+		curChar = string.charAt(i);
+		if(isSymbol(curChar)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ** string.splitWithIndex
 ** ----------------
 ** This functions is a string function

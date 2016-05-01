@@ -93,11 +93,14 @@ $(document).ready(function() { // wait for page to load to run Javascript
 	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	function evaluate(input) {
 		// First step is to split into an array based on line breaks
-		input = splitByLine(input);
+		input = splitByLine(input); 
 		console.log(input);
 		tokenStream = tokenize(input);
-		var astPrat = PrattParser(tokenStream);
-		console.log(astPrat);
-		console.log(astPrat.eval(envP));
+		console.log(tokenStream);
+		prePrattParser(tokenStream);
+		console.log(envP);
+		// var astPrat = PrattParser(tokenStream);
+		// console.log(astPrat);
+		// console.log(astPrat.eval(envP));
 	}
 }); // close document.onload

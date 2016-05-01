@@ -117,11 +117,22 @@ function tokenize(lineArr) {
 				j = p;
 				c = line.charAt(p);
 				foundToken = true;
+			} else if(c == "=") {
+				p++;
+				c = line.charAt(p);
+				var tokenBody = line.substring(j,p);
+				var newToken = new Token(tokenBody,j,i,"Equals");
+				tokenStream.push(newToken);
+				j=p;
+				c = line.charAt(p);
+				foundToken = true;
 			}
 			if (foundToken) {
 				j--;
 			}
 		} // j loop
+		var newLineToken = new Token("\n",j,i,"Newline");
+		tokenStream.push(newLineToken);
 	} // i 
 	if(tokenStream.length > 0) {
 		return cleanWhiteSpace(tokenStream);
