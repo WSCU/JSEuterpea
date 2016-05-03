@@ -168,6 +168,27 @@ function createDefs(definitions) {
         here = here.parent;
     }
 }
+
+// var astLamVar = createAst();
+// function createAstLam(token,ast) {
+//     var ret = Object.create(astLamVar, {
+//         getAstType: {
+//             value: function () {
+//                 return "Lam";
+//             }
+//         },
+//         eval: {
+//             value: function (env) {
+//                 //TODO
+//             }
+//         }
+//     });
+//     ret.var = token.body;
+//     ret.func = ast;
+//     ret.env = envP;
+// }
+
+
 // /*
 //     ASTAssign
 //     Assign takes a Token which is the name and an AST

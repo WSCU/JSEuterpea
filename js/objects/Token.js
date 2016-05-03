@@ -57,8 +57,9 @@ function tokenize(lineArr) {
 				c = line.charAt(p);
 				foundToken = true;
 			} else if (isSpecial(c)) { // Every special is its own token
-				var tokenBody = line.substring(j, p);
+				var tokenBody = c;
 				var newToken = new Token(tokenBody, j,i, "Special");
+                p++;
 				j = p;
 				c = line.charAt(p);
 				tokenStream.push(newToken);

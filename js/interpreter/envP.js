@@ -3,30 +3,30 @@
  */
 
 //Comment out down to other comment if you want to test with math function
-var funcSeq = new createFunPValue(2, seq);
-var seqThunk = new Thunk(funcSeq);
-var env1 = new Env("+", seqThunk);
-
-var funcPar = new createFunPValue(2, par);
-var parThunk = new Thunk(funcPar);
-var env2 = new Env("*", parThunk, env1);
+// var funcSeq = new createFunPValue(2, seq);
+// var seqThunk = new Thunk(funcSeq);
+// var env1 = new Env("+", seqThunk);
+//
+// var funcPar = new createFunPValue(2, par);
+// var parThunk = new Thunk(funcPar);
+// var env2 = new Env("*", parThunk, env1);
 
 //Comment out these in addition to commenting out above to use math functions
-// var funPlus = new createFunPValue(2, plusF);
-// var plusThunk = new Thunk(funPlus);
-// var env_1 = new Env("+", plusThunk);
-//
-// var funMinus = new createFunPValue(2, minusF);
-// var minusThunk = new Thunk(funMinus);
-// var env0 = new Env("-", minusThunk, env_1);
-//
-// var funMult = new createFunPValue(2, multF);
-// var multThunk = new Thunk(funMult);
-// var env1 = new Env("*", multThunk, env0);
-//
-// var funDiv = new createFunPValue(2, divF);
-// var divThunk = new Thunk(funDiv);
-// var env2 = new Env("/", divThunk, env1);
+var funPlus = new createFunPValue(2, plusF);
+var plusThunk = new Thunk(funPlus);
+var env_1 = new Env("+", plusThunk);
+
+var funMinus = new createFunPValue(2, minusF);
+var minusThunk = new Thunk(funMinus);
+var env0 = new Env("-", minusThunk, env_1);
+
+var funMult = new createFunPValue(2, multF);
+var multThunk = new Thunk(funMult);
+var env1 = new Env("*", multThunk, env0);
+
+var funDiv = new createFunPValue(2, divF);
+var divThunk = new Thunk(funDiv);
+var env2 = new Env("/", divThunk, env1);
 
 var c3 = new Note("acoustic_grand_piano", 36, 100, 1);
 var c3v = new createMusValue(c3);
