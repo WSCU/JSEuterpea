@@ -13,26 +13,6 @@
  !!! A NAME IS BOTH AN OPERATOR OR A REGUALR VARIABLE
  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- ** factoryAst(curToken, tokenStream)
- ** ----------------
- ** Factory function
- **
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-// function factoryAst(curToken, tokenStream) {
-//     switch(curToken.type) {
-//         case "Integer":
-//             return createAstConst();
-//             break;
-//         case "Name":
-//             return new ASTVar();
-//             break;
-//         default:
-//              console.log("Error: Improper type. Check AST.js");
-//     }
-// }
-
 // /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ** SUPERCLASS: AST
 // ** ----------------
@@ -81,7 +61,8 @@ function createAstConst(token) {
     ret.token = token;
     return ret;
 }
-// /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
 //  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ** CLASS: ASTVar
 // ** ----------------
@@ -107,6 +88,16 @@ function createAstVar(token) {
     return ret;
 }
 
+
+// /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ** SUBCLASS: ASTApp
+// ** ----------------
+// ** The Represents an application of a function and one argument
+// ** The idea of Currying is used here which is the idea that if
+// ** that a function of two arguments can be represented as a function
+// ** of one argument where that argument is a function which takes the secound argument
+// ** Extends AST
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 var astAppVar = createAst();
 function createAstApp() {
     var ret = Object.create(astAppVar, {
@@ -138,6 +129,14 @@ function createAstApp() {
     return ret;
 }
 
+
+// /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ** SUBCLASS: ASTDef
+// ** ----------------
+// ** This creates nods which represent definition of a variable to an AST
+// ** The token is the name that the AST will be referenced as.
+// ** Extends AST
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 var astDefVar = createAst();
 function createAstDef(token, ast) {
     var ret = Object.create(astDefVar, {
@@ -158,6 +157,14 @@ function createAstDef(token, ast) {
     return ret;
 }
 
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** createDefs(definitions)
+ ** ----------------
+ ** This function takes an array of ASTDefs and adds all of them to the envP
+ ** It then goes and back patches all the thunks in the envP so they all have can
+ ** reference the same environment. This allows for mutual-recursion.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function createDefs(definitions) {
     for (var i = 0; i < definitions.length; i++) {
         definitions[i].eval(envP);
@@ -168,100 +175,3 @@ function createDefs(definitions) {
         here = here.parent;
     }
 }
-
-// var astLamVar = createAst();
-// function createAstLam(token,ast) {
-//     var ret = Object.create(astLamVar, {
-//         getAstType: {
-//             value: function () {
-//                 return "Lam";
-//             }
-//         },
-//         eval: {
-//             value: function (env) {
-//                 //TODO
-//             }
-//         }
-//     });
-//     ret.var = token.body;
-//     ret.func = ast;
-//     ret.env = envP;
-// }
-
-
-// /*
-//     ASTAssign
-//     Assign takes a Token which is the name and an AST
-//     This should put the AST into an Enviornment with the body of the
-//     token as the Token name.
-//  */
-// var ASTAssign = function (body) {
-//     //TODO
-// };
-// ASTAssign.prototype = Object.create(AST.prototype);
-// ASTAssign.prototype.constructor = ASTAssign;
-
-// ASTAssign.prototype.isAssign = function () {
-//     return true;
-// };
-// ASTAssign.prototype.eval = function (e) {
-//     //TODO
-// };
-
-// /*
-//     ASTApp
-//     This is for application of functions
-//     It takes to ASTs the function and what the function is being applied to
-//  */
-// var ASTApp = function(fn, arg) {
-//     if (fn.isAST() && arg.isAST()) {
-//         this.fn = fn;
-//         this.arg = arg;
-//     }
-//     else {
-//         //TODO
-//         //Error Messages
-//     }
-// };
-// ASTApp.prototype = Object.create(AST.prototype);
-// ASTApp.prototype.constructor = ASTApp;
-
-// ASTApp.prototype.isApp = function() {
-//     return true;
-// };
-// ASTApp.prototype.eval = function(e) {
-//     funct = this.fn.eval(e);
-//     if (!funct.isFunct()) {
-//         //TODO errors
-//     }
-//     else {
-//         t = new Thunk(e, this.arg);
-//         return funct.apply(t);
-//     }
-// };
-
-// /*
-//     ASTLambda
-//     Takes 2 ASTs a Variable and another AST
-//     The first AST is the Variable that is bound by the Lambda
-//     And the second can be anything
-//  */
-// var ASTLambda = function(Lvar, body) {
-//     if (Lvar.isVar() && body.isAST()) {
-//         this.Lvar = Lvar;
-//         this.body = body;
-//     }
-//     else {
-//         //TODO
-//         //error message
-//     }
-// };
-// ASTLambda.prototype = Object.create(AST.prototype);
-// ASTLambda.prototype.constructor = ASTLambda;
-
-// ASTLambda.prototype.isLambda = function () {
-//     return true;
-// };
-// ASTLambda.prototype.eval = function (e) {
-//     //TODO
-// };

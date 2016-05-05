@@ -6,6 +6,15 @@
 ** We have to split this into something the program can understand.
 ** Start with 3 + 2 * 1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** PrattParser(tokenStream)
+ ** ----------------
+ ** This is the lowest level of the PrattParser and takes a token stream that has
+ ** already been through PreParse()
+ ** This function finds the lowest president token in the stream and groups the
+ ** left and right side of that token and recursively Parses it.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function PrattParser(tokenStream) {
 	if(nonWhiteSpace(tokenStream) == 1) {
 		var curToken = findNonWhite(tokenStream);
@@ -40,6 +49,12 @@ function PrattParser(tokenStream) {
 	return createAstApp(operator,astL,astR);
 }
 
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** nonWhiteSpace(tokenStream)
+ ** ----------------
+ ** This functions returns the number of non white space characters in a stream.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function nonWhiteSpace(tokenStream) {
 	var nonWS = 0;
 	for (var i = 0; i < tokenStream.length; i++) {
@@ -51,6 +66,13 @@ function nonWhiteSpace(tokenStream) {
 	return nonWS;
 }
 
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** findNonWhite(tokenStream)
+ ** ----------------
+ ** This functions returns the first occurrence of a token in the given stream
+ ** that is not a white space character.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function findNonWhite(tokenStream) {
 	for(var i = 0; i < tokenStream.length; i++) {
 		if (tokenStream[i].type != "White Space" && tokenStream[i].type != "Newline") {
@@ -59,7 +81,15 @@ function findNonWhite(tokenStream) {
 	}
 }
 
-//Needs to return a new Token Stream with Asts in it
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** preParse(tokenStream)
+ ** ----------------
+ ** This functions takes a tokenStream and puts ASTs into the token stream where
+ ** ever there is a function call (i.e. f x where f is a predefined function)
+ ** and where ever there is a open parentheses it will recursively Parse the inside
+ ** until it reaches a closing parentheses.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function preParse(tokenStream) {
     var ret = [];
     var operator = false;
@@ -112,6 +142,13 @@ function preParse(tokenStream) {
     return ret;
 }
 
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** isOperand(token)
+ ** ----------------
+ ** This function takes a token and determines if it is to be treated as an
+ ** operand(true) or operator(false)
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function isOperand(token) {
     if (token.type == "Name" || token.type == "Integer") {
         return true;
@@ -121,6 +158,13 @@ function isOperand(token) {
     }
 }
 
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ** prePrattParser(tokenStream)
+ ** ----------------
+ ** This function takes a TokenStream and breaks it into a list of ASTDefs
+ ** that is representative of each statement contained in the tokenStream.
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function prePrattParser(tokenStream) {
 	var name;
 	var body;
